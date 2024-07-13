@@ -10,6 +10,7 @@ const endpointAdmisionesGet = "https://lizard2.vercel.app/api/admision";
 const endpointGetProfesores = "https://lizard2.vercel.app/api/profesores";
 const endpointAdmisionCrear = "https://lizard2.vercel.app/api/admision";
 const endpointAdmisionOfertas = "https://lizard2.vercel.app/api/oferadmi";
+const endpointOfertaProfesores = "https://lizard2.vercel.app/api/ofertaprofe";
 const endpointCrearOferta = "https://lizard2.vercel.app/api/oferta";
 
 const endpointProfesorObtener =
@@ -94,12 +95,24 @@ const cuerpoCrearAdmision = [
     activo: false,
   },
 ];
+
 const cuerpoRelacionarAdmisionYOfertas = [
   {
     admisionId: "668ca655ab0617de4aede8dd",
     ofertaIds: [
       "66915aa86226cb107c5d4906",
       "6691700fd652006c894a3063"
+    ]
+  }
+  ,
+];
+
+const cuerpoRelacionarOfertaYProfesores = [
+  {
+    ofertaId: "6691c134288500ad483ac785",
+    profesorIds: [
+      "669161c95f955b9ab60b2981",
+      "66906cd51c2becb93b2bedf0"
     ]
   }
   ,
@@ -114,9 +127,16 @@ const responseMensajeAltaAdmision = [
     updatedAt: "2024-04-06T19:56:00.138Z",
   },
 ];
+
 const responseMensajeAltaRelacionAdmisionYOferta = [
   {
     message: "Admisiones y ofertas educativas vinculadas exitosamente"
+  },
+];
+
+const responseMensajeAltaRelacionOfertaYPorfessores = [
+  {
+    message: "Oferta educativa y profesores vinculados exitosamente"
   },
 ];
 
@@ -623,6 +643,54 @@ export default function ResetPassword() {
               </div>
             </div>
           </div>
+
+          {/* Bloque Oferta Educativa - Relacionar una oferta educativa con profesores */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Relacionar una oferta educativa con varios profesores
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Con el siguiente endpoint puedes asignar, editar y eliminar profesores a una oferta educativa
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointOfertaProfesores}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointOfertaProfesores}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para dar de alta es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-yellow-600 bg-yellow-200 rounded-full mb-4">
+                POST
+              </div>{" "}
+              Y colocar lo siguiente en el encabezado y cuerpo para dar de alta:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(cuerpoRelacionarOfertaYProfesores, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 201
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje al ser creada:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(responseMensajeAltaRelacionOfertaYPorfessores, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
           {/* Bloque Oferta - Editar */}
           <div className="bg-blue p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-center mb-4">
