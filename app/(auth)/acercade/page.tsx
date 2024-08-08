@@ -99,7 +99,8 @@ const responseDataOfertaGet = [
     createdAt: "2024-04-02T01:51:39.622Z",
     updatedAt: "2024-04-02T01:51:39.622Z",
     admisiones: [],
-    profesores: []
+    profesores: [],
+    materias: []
   },
   {
     _id: "660b64bf6ac256bb1f621c41",
@@ -117,6 +118,10 @@ const responseDataOfertaGet = [
         nombre: "Claudia",
         apellidos: "Arteaga"
       }
+    ],
+    materias: [
+      "Aplicaciones Web 2",
+      "Aplicaciones Web Orientado a Objetos"
     ]
   },
 ];
@@ -129,7 +134,8 @@ const responseDataOfertaGetById = [
     createdAt: "2024-04-02T01:51:39.622Z",
     updatedAt: "2024-04-02T01:51:39.622Z",
     admisiones: [],
-    profesores: []
+    profesores: [],
+    materias: []
   },
 ];
 

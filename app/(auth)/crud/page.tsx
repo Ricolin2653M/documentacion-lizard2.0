@@ -11,6 +11,7 @@ const endpointGetProfesores = "https://lizard2.vercel.app/api/profesores";
 const endpointAdmisionCrear = "https://lizard2.vercel.app/api/admision";
 const endpointAdmisionOfertas = "https://lizard2.vercel.app/api/oferadmi";
 const endpointOfertaProfesores = "https://lizard2.vercel.app/api/ofertaprofe";
+const endpointOfertaMaterias = "https://lizard2.vercel.app/api/ofermat";
 const endpointCrearOferta = "https://lizard2.vercel.app/api/oferta";
 const endpointDivisiones = "https://lizard2.vercel.app/api/divisiones";
 
@@ -118,6 +119,17 @@ const cuerpoRelacionarOfertaYProfesores = [
   ,
 ];
 
+const cuerpoRelacionarOfertaYMaterias = [
+  {
+    ofertaId: "6691c134288500ad483ac785",
+    materiaIds: [
+      "66b314a244f667a13dd72491",
+      "66b3219144f667a13dd724c1"
+    ]
+  }
+  ,
+];
+
 const cuerpoRelacionarDivisionesYOfertas = [
   {
     ofertaId: "6691c134288500ad483ac785",
@@ -145,42 +157,48 @@ const responseMensajeAltaRelacionAdmisionYOferta = [
   },
 ];
 
-const responseMensajeAltaRelacionOfertaYPorfessores = [
+const responseMensajeAltaRelacionOfertaYPorfesores = [
   {
     message: "Oferta educativa y profesores vinculados exitosamente"
   },
 ];
 
+const responseMensajeAltaRelacionOfertaYMaterias = [
+  {
+    message: "Oferta educativa y materias vinculados exitosamente"
+  },
+];
+
 const responseMensajeAltaRelacionDivisionesYOfertas = [
   [
-    
+
     {
-        "_id": "6699712c375082ca4dc05278",
-        "nombre": "División de Prueba",
-        "descripcion": "Esta es una división de prueba",
-        "ofertasEducativas": [
-            {
-                "_id": "6691c134288500ad483ac785",
-                "nombre": "Curso Chat-GPT",
-                "activo": true,
-                "admisiones": [
-                    "ENE-FEB 2025",
-                    "ENE-FEB 2022",
-                    "pruebas",
-                    "pru"
-                ],
-                "profesores": [
-                    "Ana Sol",
-                    "Martina"
-                ],
-                "createdAt": "2024-07-12T23:50:12.532Z",
-                "updatedAt": "2024-07-19T06:24:28.728Z"
-            }
-        ],
-        "createdAt": "2024-07-18T19:46:52.342Z",
-        "updatedAt": "2024-07-18T19:46:52.342Z"
+      "_id": "6699712c375082ca4dc05278",
+      "nombre": "División de Prueba",
+      "descripcion": "Esta es una división de prueba",
+      "ofertasEducativas": [
+        {
+          "_id": "6691c134288500ad483ac785",
+          "nombre": "Curso Chat-GPT",
+          "activo": true,
+          "admisiones": [
+            "ENE-FEB 2025",
+            "ENE-FEB 2022",
+            "pruebas",
+            "pru"
+          ],
+          "profesores": [
+            "Ana Sol",
+            "Martina"
+          ],
+          "createdAt": "2024-07-12T23:50:12.532Z",
+          "updatedAt": "2024-07-19T06:24:28.728Z"
+        }
+      ],
+      "createdAt": "2024-07-18T19:46:52.342Z",
+      "updatedAt": "2024-07-18T19:46:52.342Z"
     }
-]
+  ]
 ];
 
 const cuerpoEditarAdmision = [
@@ -220,6 +238,9 @@ const responseMensajeAltaOferta = [
     _id: "6611af5e113a232072468fc1",
     createdAt: "2024-04-06T20:23:58.536Z",
     updatedAt: "2024-04-06T20:23:58.536Z",
+    admisiones: [],
+    profesores: [],
+    materias: []
   },
 ];
 
@@ -728,13 +749,14 @@ export default function ResetPassword() {
             <div>
               <div className="bg-gray-600 p-4 rounded-md shadow-md">
                 <pre className="overflow-x-auto">
-                  {JSON.stringify(responseMensajeAltaRelacionOfertaYPorfessores, null, 2)}
+                  {JSON.stringify(responseMensajeAltaRelacionOfertaYPorfesores, null, 2)}
                 </pre>
               </div>
             </div>
           </div>
-              {/* Bloque Divisiones- Relacionar una división con ofertas educativas  */}
-            <div className="bg-blue p-8 rounded-lg shadow-md">
+
+          {/* Bloque Divisiones- Relacionar una división con ofertas educativas  */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-center mb-4">
               Relacionar una división con ofertas educativas
             </h2>
@@ -779,6 +801,54 @@ export default function ResetPassword() {
               </div>
             </div>
           </div>
+
+          {/* Bloque Oferta Educativa - Relacionar una oferta educativa con materias */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Relacionar una oferta educativa con varias materias
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Con el siguiente endpoint puedes asignar, editar y eliminar materias a una oferta educativa
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointOfertaMaterias}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointOfertaMaterias}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para dar de alta es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-yellow-600 bg-yellow-200 rounded-full mb-4">
+                POST
+              </div>{" "}
+              Y colocar lo siguiente en el encabezado y cuerpo para dar de alta:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(cuerpoRelacionarOfertaYMaterias, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 201
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje al ser creada:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(responseMensajeAltaRelacionOfertaYMaterias, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
           {/* Bloque Oferta - Editar */}
           <div className="bg-blue p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-center mb-4">
